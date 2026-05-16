@@ -33,11 +33,10 @@ You are an expert study assistant. Using ONLY the context provided below,
 give a thorough and detailed answer to the question.
 
 Your answer should:
-- Be comprehensive and well-structured
-- Use bullet points or numbered lists where appropriate
-- Include relevant examples or explanations from the context
-- Use headings to organise if the answer covers multiple topics
-- Be as detailed as possible — do NOT summarise briefly
+- Be comprehensive, detailed, and well-structured.
+- Use clear headings to organize the information if the answer covers multiple topics.
+- Use bullet points or numbered lists for key points and lists of items.
+- Ensure the output is clean and easy to read.
 - If the answer is not in the context, say "I don't have enough information in the uploaded documents."
 
 Context:
@@ -49,9 +48,10 @@ Detailed Answer:"""
 
 SUMMARIZE_PROMPT_TEMPLATE = """\
 You are an expert academic summariser. Read the context below and produce a
-comprehensive, structured summary of ALL the content. Cover all main topics,
-key concepts, findings, and important details. Use clear headings and bullet
-points. Be thorough — do NOT omit important details.
+comprehensive, structured summary of ALL the content.
+- Use clear headings to organize different sections.
+- Use bullet points for key findings and details.
+- Be thorough and ensure the output is clean and well-formatted.
 
 Context:
 {context}
