@@ -1,7 +1,15 @@
-# RAG System
+<h1 align="center">RAG SYSTEM</h1>
 
 This is a modular Retrieval-Augmented Generation (RAG) system built with Flask, Langchain, and ChromaDB. It allows users to upload PDF documents, index them, and ask questions based on the content of the documents.
+<div align="center">
 
+<img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-blue?style=for-the-badge">
+<img src="https://img.shields.io/badge/Backend-Python%20(Flask)-green?style=for-the-badge">
+<img src="https://img.shields.io/badge/Framework-LangChain-purple?style=for-the-badge">
+<img src="https://img.shields.io/badge/VectorDB-ChromaDB-orange?style=for-the-badge">
+<img src="https://img.shields.io/badge/LLM-OpenRouter-red?style=for-the-badge">
+<img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge">
+</div>
 ## Features
 
 - **Upload PDFs**: Simple endpoint to upload PDF documents.
