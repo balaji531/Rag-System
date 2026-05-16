@@ -10,6 +10,9 @@ This is a modular Retrieval-Augmented Generation (RAG) system built with Flask, 
 <img src="https://img.shields.io/badge/LLM-OpenRouter-red?style=for-the-badge">
 <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge">
 </div>
+
+--- 
+
 ## Features
 
 - **Upload PDFs**: Simple endpoint to upload PDF documents.
@@ -19,10 +22,93 @@ This is a modular Retrieval-Augmented Generation (RAG) system built with Flask, 
 - **Background Processing**: Handles document indexing asynchronously.
 - **RESTful API**: Structured and modularized API routes.
 
+---
+
+## System Architecture
+
+                ┌──────────────────────┐
+                │   Upload PDF         │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │  PDF Cleaning &      │
+                │          Indexing    │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │    Text Chunking     │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │   Embedding Model    │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │     Vector DB        │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │     Ask Question     │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │  Semantic Search     │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │  Prompt to LLM with  │
+                │   Query & Retrieved  │
+                │       Context        │
+                └─────────┬────────────┘
+                          ↓
+                ┌──────────────────────┐
+                │     LLM Response     │
+                └──────────────────────┘
+
+---
+
+## Tech Stack
+
+- HTML,CSS and JS
+- Python (Flask)
+- langchain
+- sentence-tranformer
+- chromadb
+- pypdf
+
+---
+
+##  Embedded Model 
+
+- The embedding model used is all-MiniLM-L6-v2.
+  Why?
+  - It allows the system to convert text to vectors and perform semantic search
+  - Easy to setup and use
+  - Helps for Similiarity search
+
+---
+
+##  Vector Database
+
+- The Vector Database used is Chroma db.
+  Why?
+  - Native LangChain Support
+  - It is extremely fast and lightweight
+  - Without need of CPU
+    
+---
+
+## Application Preview
+
+<img width="1919" height="979" alt="image" src="https://github.com/user-attachments/assets/9a6f0e10-63d3-47bb-8ea6-bed2004a23e9" />
+
+---
 ## Prerequisites
 
 - Python 3.9+
 - [OpenRouter](https://openrouter.ai/) API Key
+
+---
 
 ## Setup & Installation
 
@@ -51,10 +137,9 @@ This is a modular Retrieval-Augmented Generation (RAG) system built with Flask, 
    ```ini
    OPENROUTER_API_KEY=your_api_key_here
    OPENROUTER_MODEL=openai/gpt-4o-mini
-   # Optional configurations:
-   # EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
-   # CHUNK_SIZE=1024
-   # CHUNK_OVERLAP=200
+   EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+   CHUNK_SIZE=1024
+   CHUNK_OVERLAP=200
    ```
 
 5. **Run the Application:**
@@ -62,15 +147,6 @@ This is a modular Retrieval-Augmented Generation (RAG) system built with Flask, 
    python app.py
    ```
    The application will run on `http://127.0.0.1:5000/`.
-
-## Architecture
-
-The project is structured into logical modules:
-- `/api`: Contains Flask blueprints for routing (health, upload, query).
-- `/rag_core`: Contains the core logic for the RAG engine, vector database, and state management.
-- `/frontend`: Contains static files and templates for the user interface.
-- `app.py`: The entry point for the Flask application.
-- `config.py`: Global configuration and environment variable management.
 
 ## Contributing
 
