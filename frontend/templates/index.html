@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="StudentRAG — Upload academic PDFs and get instant AI-powered answers, summaries, and quizzes powered by a retrieval-augmented generation system." />
+  <title>StudentRAG — Academic Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <style>
+    /* Global Reset & Scrollbar Hide */
+    html, body, * {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">StudentRAG</span>
+      </div>
+      <p class="sidebar-sub">Academic PDF Assistant</p>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>DASHBOARD</h3>
+      <div class="status-grid">
+        <div class="status-row">
+          <span class="status-label">API Status</span>
+          <span id="status-api" class="status-badge loading">checking…</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">LLM Core</span>
+          <span id="status-llm" class="status-badge loading">—</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">Vector DB</span>
+          <span id="status-col" class="status-badge loading">—</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">Total Chunks</span>
+          <span id="status-chunks" class="status-badge">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>KNOWLEDGE BASE</h3>
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="file-input" accept=".pdf" hidden />
+        <span class="upload-icon">↑</span>
+        <p>Drop PDF here or <button class="link-btn" onclick="document.getElementById('file-input').click()">browse</button></p>
+      </div>
+      <div id="upload-status" class="upload-status hidden"></div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>INDEXED SOURCES</h3>
+      <ul class="sources-list" id="sources-list">
+        <li class="sources-empty">No sources indexed yet.</li>
+      </ul>
+    </div>
+
+  </aside>
+
+  <main class="chat-main">
+    <header class="chat-header">
+      <div>
+        <h1>Chat with Documents</h1>
+        <p>Intelligent Academic Assistant — Fully Prompt Controlled</p>
+      </div>
+      <button class="clear-btn" onclick="clearChat()">↺ Clear Chat</button>
+    </header>
+
+    <div class="chat-window" id="chat-window">
+      <div class="message system-message">
+        <div class="message-icon">⬡</div>
+        <div class="message-body">
+          <p>Hello! I'm <strong>StudentRAG</strong>. I can help you study, create quizes, and summarize your academic papers.</p>
+          <p style="margin-top: 8px; font-size: 13px; color: var(--text-dim);">Upload a PDF to the Knowledge Base on the left to get started. You can ask for specific mark-based answers or summaries directly in your prompt!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <div class="input-container">
+        <div class="input-row">
+          <textarea
+            id="query-input"
+            placeholder="Ask a question or request a task (e.g. 'Create a quiz for chapter 1')..."
+            rows="1"
+            maxlength="1000"
+            onkeydown="handleKeyDown(event)"
+            oninput="autoResize(this); updateCharCount(this)"
+          ></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendQuery()">
+            <span id="send-icon">→</span>
+          </button>
+        </div>
+        <div class="input-meta">
+          <span id="char-count" class="char-count">0 / 1000 characters</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
